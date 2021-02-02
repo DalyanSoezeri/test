@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon server2.js",
     "peer" : "peerjs --port 3001",
-    "all" : "npm-run-all --parallel server peer"
+    "start" : "npm-run-all --parallel server peer"
   },
   "keywords": [],
   "author": "",
