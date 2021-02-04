@@ -12,9 +12,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'))
 
 app.get('/', function(req, res){
-    //res.sendFile(path.join(__dirname + '/index.html'))
     res.redirect(`/${uuidV4()}`);
 })
+
 
 
 app.get('/:room',(req, res)=>{
@@ -25,6 +25,7 @@ app.get('/:room',(req, res)=>{
 const Port = process.env.Port || 3000;
 
 server.listen(Port, () => console.log('Server Started'))
+
 
 io.on('connection',socket=>{
     console.log('A new Client has been connected')
