@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: #677eff;
+  background-size: cover;
+}
+
+.calendar
+{
+  width: 300px;
+  height: auto;
+  background: #fff;
+  box-sizing: border-box;
+  margin-top: 5%;
+  margin-bottom: 22%;
+}
+
+.calendar .date
+{
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25px,1fr));
+  grid-gap: 10px;
+  box-sizing: border-box;
+}
+
+.calendar .date div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  color: #262626;
+}
+
+.calendar .date div.day{
+  font-weight: 700;
+
+}
+
+.calendar .date div.day:first-child,
+.calendar .date div.number:nth-child(7n+1)
+{
+  color: #ff685d;
+}
+
+.calendar .date div.number.active{
+  background: #677eff;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.calendar .img{
+  background: url("quotla_vida_es_tan_corta_que_no_da_para_masquot_parafraseando_a_mi_queridsimo_sal_landel_513528.jpg");
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.calendar h2, h3{
+  margin-top: 0;
+  padding: 0;
+  text-shadow: 0 2px 2px rgba(0,0,0,0.2);
+}

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+
+        function changerow(){
+            const hallo = "<%= ttime%>";
+            var tunji = hallo;
+            var head = '<p> <button style="margin-left: -15px;" type="button" class="btn btn-lg btn-default">TIme1</button> </p> <div class="page-header"> <h1> <span class="label label-default" id="M">Monday</span> <span class="label label-primary" id="Thue">Thuesday</span> <span class="label label-success" id="W">Wednesday</span> <span class="label label-info" id="Thur">Thursday</span> <span class="label label-warning" id="F">Friday</span> </h1><div class="row"> <div class="col-md">   <table class="table">  <thead>'
+            var Middle = "";
+            const end = ' </thead></table></div></div>';
+            var table = "";
+            tunji = tunji.substring(695,tunji.length-70);
+
+                tunji = tunji.replaceAll("th&gt","").replaceAll("&lt","").replaceAll("/","").replaceAll(";th","").replaceAll(";;;;",",").replaceAll("tr&gt","")
+                .replaceAll("md&#34;&gt;   ;table class=&#34;table&#34;&gt;  ead&gt;","").replaceAll(";","").replaceAll("- ","");
+
+            var Mak = tunji.split(" ")
+            var ids = 1;
+            Mak.forEach(element => {
+                var Mak2 = element.split(",")
+             if(element != ""){
+                 var line = "<tr>"
+                Mak2.forEach(element2 => {
+                     line += `<th style="text-align: left; size: 5;"> <input placeholder="${element2}" id="${ids}" type="text" class="form-control"> </th>`
+                    irgendwas.push({
+                        fach:element2,
+                        id: ids,
+                        htmlline: `<th><input name="${ids}" value="${element2}" style="opacity: 0; width: 0%; height: 0%;">${element2}</th>`
+                    });
+                    ids++;
+                })
+                line += "</tr>"
+                  Middle += line;
+             }
+            })
+           head += Middle + end;
+
+            document.getElementById('chag').innerHTML=head;
+            document.getElementById('values').innerHTML=ids;
+
+
+        }
+
+
+
+var irgendwas = [{}];
+
+function alertvalue(){
+    for (let index = 1; index < parseInt(document.getElementById(`values`).innerHTML); index++) {
+            console.log(document.getElementById(`${index}`).value);
+                        if(document.getElementById(`${index}`).value!=""){
+                            irgendwas[index].htmlline=irgendwas[index].htmlline.replaceAll( irgendwas[index].fach,document.getElementById(`${index}`).value)
+                            irgendwas[index].fach=document.getElementById(`${index}`).value;
+                        } 
+                    
+            }
+
+        createlastttime();
+}
+
+
+function createlastttime(){
+    console.log(irgendwas)
+    var head = '<p> <button style="margin-left: -15px;" type="button" class="btn btn-lg btn-default">TIme1</button> </p> <div class="page-header"> <h1> <span class="label label-default" id="M">Monday</span> <span class="label label-primary" id="Thue">Thuesday</span> <span class="label label-success" id="W">Wednesday</span> <span class="label label-info" id="Thur">Thursday</span> <span class="label label-warning" id="F">Friday</span> </h1><div class="row"> <div class="col-md">   <table class="table">  <thead>'
+    var Middle = "";
+    const end = ' </thead></table></div></div>';
+            var line = "<tr>"
+                for (let index = 1; index < parseInt(document.getElementById(`values`).innerHTML); index++) {
+                    if(index % 5 == 0){
+                        line += irgendwas[index].htmlline;
+                        line += "</tr>"
+                        Middle += line;
+                        line = "<tr>"
+                    }
+                    else{
+                       
+                    
+                   
+                        line += irgendwas[index].htmlline;
+                    
+                    }
+                    
+                }
+                
+    head += Middle + end;
+    document.getElementById('sik').innerHTML=head;
+}
+
+
+        function removerow(){
+            i=parseInt(document.getElementById("countRows").textContent);
+            document.getElementById("settable"+i).innerHTML='';
+            i--;
+            document.getElementById("countRows").innerHTML=i+"";
+        }
+
+        function save(){
+            let index = document.getElementById('countRows').textContent;
+            var all=document.getElementById("tablename").value;
+            for (let rows = 0; rows <= index; rows++) {
+                all+=";"+rows+""
+                for (let colums = 1; colums <= 5; colums++) {
+                    //alert(document.getElementById(rows+"_"+colums).value );
+                    all=all+":"+document.getElementById(`${rows}_${colums}`).value;
+                    //all=document.getElementById(rows+"_"+colums).value;
+                }
+            }
+            // for (let index = 0; index < 9; index++) {
+            //    if(index==0){
+
+            //     if(localStorage.getItem("timetable")===null)
+            //     {
+            //         localStorage.setItem("timetable",all);
+            //         return
+            //     }
+            //    }
+            //    else{
+            //     if(localStorage.getItem("timetable"+index)===null)
+            //     {
+            //         localStorage.setItem("timetable"+index,all);
+            //         return
+            //     }
+            //    }
+            // }
+
+            // location.href="theme.html";
+        }
+
+        function renderpage(){
+            render('theme', {username: req.session.username, ttime:full})
+        }
+    </script>
+
+    <!--<script src="createtimtablesave.js"></script>-->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <style>#addbutton { justify-content: center; align-items: center; text-align: center; position: center; }</style>
+    <title>TimeTableSPx</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../static3/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../static3/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../static3/theme.css" rel="stylesheet">
+    <script>
+        function change(){
+            const day=document.getElementById('day');
+            const date=new Date();
+
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            day.textContent=date.getDate()+", "+days[date.getDay()];
+
+            const monthyear=document.getElementById('monthyear');
+
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            monthyear.textContent=monthNames[date.getMonth()]+" | "+date.getFullYear()
+
+            changerow()
+        }
+    </script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body role="document" onload="change()">
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">SPx</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a ><form method="GET" action="rendertotheme">
+                            <button type="submit" class="navbar-collapse collapse" style="background-color: transparent; border-color: transparent;">Home</button>
+                        </form></a>
+                </li>
+                <li>
+                    <a href="/index">Chat</a>
+                </li>
+                <li>
+                    <a href="http://localhost:3002">Call</a>
+                </li>
+                <li>
+                    <a href="/documents">Documents</a>
+                </li>
+                <li>
+                    <a href="/calendar">Calendar</a>
+                </li>
+                <li>
+                    <a href="/blog">Contact</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">Settings</a>
+                        </li>
+                        <li>
+                            <a href="#">Another action</a>
+                        </li>
+                        <li>
+                            <a href="#">Something else here</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li>
+                            <a href="#">Separated link</a>
+                        </li>
+                        <li>
+                            <a href="#">One more separated link</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+        <p style="text-align: right; margin-top: -35px;"><a href="/sign-in" style="color: white; text-decoration: none;">Logout&nbsp;&nbsp;<img src="../static3/ausloggen.png" width="25"></a></p>
+    </div>
+</nav>
+<div class="container theme-showcase" role="main">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Create your timetable</h1>
+        <h2 id="day" style="text-align:right">Day</h2>
+        <p id="monthyear" style="text-align:right"><span style="color: inherit; font-family: inherit; font-size: 30px;">Month</span><br></p>
+    </div>
+
+    
+    
+    
+    <div id="chag"></div>
+   
+    <p><a style="opacity: 0;" id="values"></a></p>
+    <button class="btn btn-lg btn-default" onclick="alertvalue()">Change</button>
+   
+    <form name="changeall" action="changettime" method="POST">
+        <div name="lasttime" id="sik"></div>
+        <button class="btn btn-lg btn-default" type="submit">Save</button>
+    </form>
+    
+</div>
+
+</div>
+</body>
+</html>

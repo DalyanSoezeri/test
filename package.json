@@ -1,20 +1,32 @@
 {
-  "name": "zoom-clone",
+  "name": "dbtest",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-
-    "start": "node server.js"
+    "server": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "assert": "^2.0.0",
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
-    "peer": "^0.5.3",
-    "socket.io": "^2.3.0",
-    "uuid": "^8.3.0"
+    "express-fileupload": "^1.2.1",
+    "express-session": "^1.17.1",
+    "fullcalendar": "^5.5.1",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.10.7",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "peer": "^0.6.1",
+    "socket.io": "^3.0.4",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

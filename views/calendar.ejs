@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <link href='../static6/lib/main.css' rel='stylesheet'/>
+    <!-- Bootstrap core CSS -->
+    <link href="../static6/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../static6/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src='../static6/lib/main.js'></script>
+    <script src="../static6/playground.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+
+            var containerEl = document.getElementById('external-events-list');
+    new FullCalendar.Draggable(containerEl, {
+      itemSelector: '.fc-event',
+      eventData: function(eventEl) {
+        return {
+          title: eventEl.innerText.trim()
+        }
+      }
+    });
+
+
+            var day = "";
+            var month = "";
+            var year = "";
+            const date = new Date();
+
+           var content = '[{title: "All Day Event", start: "2020-09-01" }]'
+   
+
+            if (date.getDate() <= 9) {
+                day = '0' + date.getDate();
+            } else {
+                day = date.getDate();
+            }
+
+            if (date.getMonth() + 1 <= 9) {
+                month = '0' + (date.getMonth() + 1);
+            } else {
+                month = (date.getMonth() + 1);
+            }
+
+            year = date.getFullYear();
+            var ka=[{"title": "All Day Event", "start": "2020-09-01" }, {"title": "Hallo", "start": "2021-02-24" }];
+            //var ka2=getdata();
+            //console.log(ka2)
+                var theInput = document.getElementById("colorid");
+                
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                initialDate: `${year}-${month}-${day}`,
+                navLinks: true, // can click day/week names to navigate views
+                nowIndicator: true,
+
+                weekNumbers: true,
+                weekNumberCalculation: 'ISO',
+
+                editable: true,
+                selectable: true,
+                dayMaxEvents: true, // allow "more" link when too many events
+                
+                events: [{title:ka[1].title,
+                        start:ka[1].start
+                }],
+                eventColor:  theInput.value
+                
+               //events:''
+
+                //events:
+                // [
+                //     {
+                //         title: "All Day Event",
+                //         start: "2020-09-01"
+                //     },
+                //     {
+                //         title: "Long Event",
+                //         start: "2020-09-07",
+                //         end: "2020-09-10"
+                //     },
+                //     {
+                //         groupid: "999",
+                //         title: "Repeating Event",
+                //         start: "2020-09-09T16:00:00-05:00"
+                //     },
+                //     {
+                //         groupid: "999",
+                //         title: "Repeating Event",
+                //         start: "2020-09-16T16:00:00-05:00"
+                //     },
+                //     {
+                //         title: "Conference",
+                //         start: "2020-09-11",
+                //         end: "2020-09-13"
+                //     },
+                //     {
+                //         title: "Meeting",
+                //         start: "2020-09-12T10:30:00-05:00",
+                //         end: "2020-09-12T12:30:00-05:00"
+                //     },
+                //     {
+                //         title: "Lunch",
+                //         start: "2020-09-12T12:00:00-05:00"
+                //     },
+                //     {
+                //         title: "Meeting",
+                //         start: "2020-09-12T14:30:00-05:00"
+                //     },
+                //     {
+                //         title: "Happy Hour",
+                //         start: "2021-02-04T14:30:00"
+                //     },
+                //     {
+                //         title: "Dinner",
+                //         start: "2020-09-12T20:00:00"
+                //     },
+                //     {
+                //         title: "Birthday Party",
+                //         start: "2020-09-13T07:00:00"
+                //     },
+                //     {
+                //         title: "Click for Google",
+                //         url: "http://google.com/",
+                //         start: "2020-09-28"
+                //     }
+                // ]
+            });
+
+            calendar.render();
+        });
+        
+       function changecolor(){
+           location.reload();
+       }
+    </script>
+    <style>
+
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        #calendar {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+
+
+        #external-events {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    width: 150px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+    text-align: left;
+    margin-top: 3%;
+  }
+
+  #external-events h4 {
+    font-size: 16px;
+    margin-top: 0;
+    padding-top: 1em;
+  }
+
+  #external-events .fc-event {
+    margin: 3px 0;
+    cursor: move;
+  }
+
+  #external-events p {
+    margin: 1.5em 0;
+    font-size: 11px;
+    color: #666;
+  }
+
+  #external-events p input {
+    margin: 0;
+    vertical-align: middle;
+  }
+    </style>
+</head>
+<body>
+    
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">SPx</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a ><form method="GET" action="rendertotheme"> 
+                            <button type="submit" class="navbar-collapse collapse" style="background-color: transparent; border-color: transparent;">Home</button>                 
+                        </form></a>
+                    </li>
+                    <li>
+                        <a href="/index">Chat</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:3002">Call</a>
+                    </li>
+                    <li>
+                        <a href="/documents">Documents</a>
+                    </li>
+                    <li class="active">
+                        <a href="/calendar">Calendar</a>
+                    </li>
+                    <li>
+                        <a href="/blog">Contact</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Settings</a>
+                            </li>
+                            <li>
+                                <a href="#">Another action</a>
+                            </li>
+                            <li>
+                                <a href="#">Something else here</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li>
+                                <a href="#">Separated link</a>
+                            </li>
+                            <li>
+                                <a href="#">One more separated link</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+            <p style="text-align: right; margin-top: -35px;"><a href="/sign-in" style="color: white; text-decoration: none;">Logout&nbsp;&nbsp;<img src="../static3/ausloggen.png" width="25"></a></p>
+        </div>
+    </nav>
+
+<br>
+
+<div id='external-events'>
+    <h2>Events</h2>
+    <div id='external-events-list'>
+    <details close>
+        <summary>
+            <font size="4">Schulisch</font>
+        </summary>
+        
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+              <div class='fc-event-main'>Test</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+              <div class='fc-event-main'>Schularbeit</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+              <div class='fc-event-main'>Präsentation</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+              <div class='fc-event-main'>Hausübung</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+              <div class='fc-event-main'>Lernen</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                <div class='fc-event-main'>Pause</div>
+              </div>
+         
+
+    </details>
+
+   
+
+    <details close>
+        <summary>
+            <font size="4">Private</font>
+        </summary>
+       
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+              <div class='fc-event-main'>Aufräumen</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+              <div class='fc-event-main'>Putzen</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+              <div class='fc-event-main'>Arzttermin</div>
+            </div>
+            <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+              <div class='fc-event-main'>Party</div>
+            </div>
+        
+        
+    </details>
+    <input type="color" id="colorid">
+    <button onclick="changecolor()">Change</button>
+    </div>    
+
+</div>
+
+<div id='calendar'></div>
+
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <style>#addbutton { justify-content: center; align-items: center; text-align: center; position: center; }</style>
+    <title>Main-SPX</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../static3/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../static3/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../static3/theme.css" rel="stylesheet">
+    <script>
+        function change(){
+            const day=document.getElementById('day');
+            const date=new Date();
+
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            day.textContent=date.getDate()+", "+days[date.getDay()];
+
+            const monthyear=document.getElementById('monthyear');
+
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            monthyear.textContent=monthNames[date.getMonth()]+" | "+date.getFullYear();
+
+            // var width=parseInt($(document).width());
+
+            // if(width<=1200){
+            //     document.getElementById("M").textContent="M";
+            //     document.getElementById("Thue").textContent="T";
+            //     document.getElementById("W").textContent="W";
+            //     document.getElementById("Thur").textContent="T";
+            //     document.getElementById("F").textContent="F";
+            // }
+            // else{
+            //     document.getElementById("M").textContent="Monday";
+            //     document.getElementById("Thue").textContent="Thuesday";
+            //     document.getElementById("W").textContent="Wednesday";
+            //     document.getElementById("Thur").textContent="Thursday";
+            //     document.getElementById("F").textContent="Friday";
+            // }
+
+            //Notendurchschnitt berechnen Bilal
+			
+			var Nd = document.getElementById('nd');
+			var Note1 = document.getElementById('S1_0');
+			var Note2 = document.getElementById('S1_1');
+			var Note3 = document.getElementById('S1_2');
+			
+			var Result = " " + (parseInt(Note1.textContent) + parseInt(Note2.textContent) + parseInt(Note3.textContent)) / 3;
+			Nd.textContent = Result.substring(0,5);
+			
+			
+			var Nd2 = document.getElementById('nd2');
+			var Note4 = document.getElementById('S2_0');
+			var Note5 = document.getElementById('S2_1');
+			var Note6 = document.getElementById('S2_2');
+			
+			var Result = " " + (parseInt(Note4.textContent) + parseInt(Note5.textContent) + parseInt(Note6.textContent)) / 3;
+			Nd2.textContent = Result.substring(0,5);
+			
+			
+
+        }
+
+    </script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body role="document" onload="change()">
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">SPx</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="/index">Chat</a>
+                </li>
+                <li>
+                    <a href="https://videoappspx.glitch.me/">Call</a>
+                </li>
+                <li>
+                   <a><form method="Get" action="renderdocuments">
+                        <button type="submit" class="navbar-collapse collapse" style="background-color: transparent; border-color: transparent;">
+                            Documents
+                        </button>
+                    </form></a>
+                </li>
+                <li>
+                    <a href="/calendar">Calendar</a>
+                </li>
+                <li>
+                    <a href="/blog">Contact</a>
+                </li>
+                <li class="dropdown">
+                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">Settings</a>
+                        </li>
+                        <li>
+                            <a href="#">Another action</a>
+                        </li>
+                        <li>
+                            <a href="#">Something else here</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li>
+                            <a href="#">Separated link</a>
+                        </li>
+                        <li>
+                            <a href="#">One more separated link</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+        <p style="text-align: right; margin-top: -35px;"><a href="/sign-in" style="color: white; text-decoration: none;">Logout&nbsp;&nbsp;<img src="../static3/ausloggen.png" width="25"></a></p>
+    </div>
+</nav>
+<div class="container theme-showcase" role="main">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Welcome&nbsp;<%= username %></h1>
+        <h2 id="day" style="text-align:right">Day</h2>
+        <p id="monthyear" style="text-align:right"><span style="color: inherit; font-family: inherit; font-size: 30px;">Month</span><br></p>
+    </div>
+    <details open>
+        <summary>
+            <font size="7">Timetable</font>
+        </summary>
+        <form method="POST" action="deletett">
+            <button style="margin-left: 85%;" class="btn btn-lg btn-default" type="submit">
+                Delete Timetable
+            </button>
+        </form>
+            <%- ttime %>
+           <img width="60px" id="addbutton" data-html="false" src="../static3/plus.png" style="display: block;
+                margin-left: auto;
+                margin-right: auto;" onclick="location.href='/createtimetbale'">
+
+        <!-- </div> -->
+    </details>
+    <form method="Get" action="renderchangetimetable">
+        <button style="margin-left: 85%;" class="btn btn-lg btn-default" type="submit">
+            change Timetable
+        </button>
+    </form>
+    <details open>
+        <summary><font size="7">Grades</font></summary>
+        <form method="POST" action="deletett2">
+            <button style="margin-left: 85%;" class="btn btn-lg btn-default" type="submit">
+                Delete Grades
+            </button>
+        </form>
+        
+        <%- ssubject %>
+
+        <img width="60px" id="addbutton2" data-html="false" style="display: block;
+            margin-left: auto;
+            margin-right: auto;" src="../static3/plus.png" onclick="location.href='/createsubject'">
+    </details>
+   
+    <details open>
+        <summary><font size="7">Tasks</font></summary>
+        <form method="POST" action="deletett3">
+            <button style="margin-left: 85%;" class="btn btn-lg btn-default" type="submit">
+                Delete Task
+            </button>
+        </form>
+        
+        <%-pprogress%>
+
+<!-- <form action="updateTaskbar" method="POST">
+    <input type="text" style="width: 5%;" class="form-control"  name="updateprogress" id="updateprogress">/5
+    <button style="margin-left: -15px; display: block;
+margin-left: auto;
+margin-right: -15px; margin-top: 5%;" type="submit" class="btn btn-lg btn-default">update Taskbar</button>
+</form> -->
+<img width="60px" id="addbutton3" data-html="false" style="display: block;
+margin-left: auto;
+margin-right: auto;" src="../static3/plus.png" onclick="location.href='/createtaskpbar'">
+    </details>
+
+   
+   
+</div>
+<br>
+<p>
+    <div style="text-align: center;">Icons erstellt von
+        <a href="https://www.flaticon.com/de/autoren/dmitri13" title="dmitri13">dmitri13</a> from
+        <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a>
+    </div>
+    <div style="text-align: center;">Icons erstellt von
+        <a href="https://www.flaticon.com/de/autoren/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from
+        <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a>
+    </div>
+</p>
+<!-- /container -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../static3/assets/js/jquery.min.js"></script>
+<script src="../static3/bootstrap/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../static3/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

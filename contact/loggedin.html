@@ -1,0 +1,119 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="calendar.css">
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="../static/main.css" rel="stylesheet">
+  <script>
+    
+
+      function change(){
+          const day=document.getElementById('day');
+          const date=new Date();
+          
+          var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+          
+          day.textContent=date.getDate()+", "+days[date.getDay()];
+
+          const monthyear=document.getElementById('monthyear');
+          
+          const monthNames = ["January", "February", "March", "April", "May", "June",
+                               "July", "August", "September", "October", "November", "December"
+                                ];
+          monthyear.textContent=monthNames[date.getMonth()]+" | "+date.getFullYear()
+         
+          const activeday=document.getElementsByClassName('number').textContent;
+
+          var firstDay = new Date(date.getFullYear(), 
+          date.getMonth(), 1);  
+
+          days.forEach(elements => {
+            if(elements.substring(0,3)===firstDay.toDateString().substring(0,3)) {
+
+              var sn=6
+              var n=1;
+             for (let index = 0; index < 40; index++) {
+                const fd=document.getElementById('number'+sn)
+                fd.textContent=n;
+                sn++;
+                n++;
+             }
+
+            }
+          })
+
+      }
+  </script>
+</head>
+<body onload="change()">
+
+    <div class="menu" style="margin-right:auto;">
+        <li><img src="https://www.socialentrepreneurshipforum.org/wp-content/uploads/2016/03/SEF_Logo_Claim_RGB-small-1.jpeg"> Chat</li>
+        <li>Subjects</li>
+    </div>
+
+  <div class="calendar" style="margin-left: auto; margin-bottom: auto;">
+    <div class="img" >
+      <h2 style="color: #ffffff" id="day"></h2>
+      <h3 style="color: #ffffff" id="monthyear"></h3>
+    </div>
+      <div class="date">
+          <div class="day">S</div>
+          <div class="day">M</div>
+          <div class="day">T</div>
+          <div class="day">W</div>
+          <div class="day">T</div>
+          <div class="day">F</div>
+          <div class="day">S</div>
+          <div class="number1" id="number1"></div>
+          <div class="number2" id="number2"></div>
+          <div class="number3" id="number3"></div>
+          <div class="number4" id="number4"></div>
+          <div class="number5" id="number5"></div>
+          <div class="number6" id="number6"></div>
+          <div class="number7" id="number7"></div>
+          <div class="number8" id="number8"></div>
+          <div class="number9" id="number9"></div>
+          <div class="number10" id="number10"></div>
+          <div class="number11" id="number11"></div>
+          <div class="number12" id="number12"></div>
+          <div class="number13" id="number13"></div>
+          <div class="number14" id="number14"></div>
+          <div class="number15" id="number15"></div>
+          <div class="number16" id="number16"></div>
+          <div class="number17" id="number17"></div>
+          <div class="number18" id="number18"></div>
+          <div class="number19" id="number19"></div>
+          <div class="number20" id="number20"></div>
+          <div class="number21" id="number21"></div>
+          <div class="number22" id="number22"></div>
+          <div class="number23" id="number23"></div>
+          <div class="number24" id="number24"></div>
+          <div class="number25" id="number25"></div>
+          <div class="number26" id="number26"></div>
+          <div class="number27" id="number27"></div>
+          <div class="number28" id="number28"></div>
+          <div class="number29" id="number29"></div>
+          <div class="number30" id="number30"></div>
+          <div class="number31" id="number31"></div>
+          <div class="number32" id="number32"></div>
+          <div class="number34" id="number34"></div>
+          <div class="number35" id="number35"></div>
+          <div class="number36" id="number36"></div>
+
+      </div>
+  </div>
+
+  <div class="middle" style="margin-top: auto;">
+      <a>hallo</a>
+  </div>
+
+  <div>
+    <a></a>
+  </div>
+
+</body>
+</html>
+

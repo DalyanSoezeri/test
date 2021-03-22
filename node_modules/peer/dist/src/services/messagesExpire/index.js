@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MessagesExpire = void 0;
 const enums_1 = require("../../enums");
 class MessagesExpire {
     constructor({ realm, config, messageHandler }) {
@@ -32,6 +33,8 @@ class MessagesExpire {
         const seen = {};
         for (const destinationClientId of destinationClientsIds) {
             const messageQueue = this.realm.getMessageQueueById(destinationClientId);
+            if (!messageQueue)
+                continue;
             const lastReadDiff = now - messageQueue.getLastReadAt();
             if (lastReadDiff < maxDiff)
                 continue;

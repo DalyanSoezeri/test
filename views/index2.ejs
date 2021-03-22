@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+
+    <link href="../static5/index22.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<div class="navbar" >
+  <a id="Spx" class="navbar-brand">SPx</a>
+    <div class="topnav-centered">
+    <a href="#home">Home</a>
+    <a class="current" href="/index">Chat</a>
+    <a href="https://videoappspx.glitch.me/">Call</a>
+    <a href="#/documents">Documents</a>
+    <a href="/calendar">Calendar</a>
+    <a href="/blog">Contact</a>
+        <a href="/other">Other</a>
+
+    <p id="logout" style="text-align: right; margin-top: -35px;"><a href="/sign-in" style="color: white; text-decoration: none;">Logout&nbsp;&nbsp;<img src="../static3/ausloggen.png" width="25"></a></p>
+    </div>
+    </div>
+
+
+
+<div class="container clearfix">
+    <div class="people-list" id="people-list">
+        <div class="search">
+            <input type="text" placeholder="search" />
+            <i class="fa fa-search"></i>
+        </div>
+        <ul class="list">
+            <!-- <li class="clearfix">
+               
+                <div class="about">
+                    <div class="name">Vincent Porter</div>
+                    <div class="status">
+                        <i class="fa fa-circle online"></i> online
+                    </div>
+                </div>
+            </li>
+
+            <li class="clearfix">
+                <div class="about">
+                    <div class="name">Aiden Chavez</div>
+                    <div class="status">
+                        <i class="fa fa-circle offline"></i> left 7 mins ago
+                    </div>
+                </div>
+            </li> -->
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+
+    <div class="chat">
+        <div class="chat-header clearfix">
+          
+
+            <div class="chat-about">
+                <div class="chat-with">Chat example</div>
+                <div class="chat-num-messages">....</div>
+            </div>
+            <i class="fa fa-star"></i>
+        </div> <!-- end chat-header -->
+
+        <div class="chat-history">
+            <ul>
+                <li class="clearfix">
+                    <div class="message-data align-right">
+                        <span class="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
+                        <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+
+                    </div>
+                    <div class="message other-message float-right">
+                        Hi Vincent, how are you? How is the project coming along?
+                    </div>
+                </li>
+
+                <li>
+                    <div class="message-data">
+                        <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+                        <span class="message-data-time">10:12 AM, Today</span>
+                    </div>
+                    <div class="message my-message">
+                        Are we meeting today? Project has been already finished and I have results to show you.
+                    </div>
+                </li>
+
+               
+                  <div  id="box"></div>
+               
+
+            </ul>
+
+        </div> <!-- end chat-history -->
+
+        <div class="chat-message clearfix">
+            <textarea name="message-to-send" id="message" placeholder ="Type your message" rows="3"></textarea>
+
+            <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+            <i class="fa fa-file-image-o"></i>
+
+            <button class="input-group-text send_btn" type="submit" id="buttonmessage">Send</button>
+
+        </div> <!-- end chat-message -->
+
+    </div> <!-- end chat -->
+
+</div> <!-- end container -->
+
+<!-- <script id="message-template" type="text/x-handlebars-template">
+    <li class="clearfix">
+        <div class="message-data align-right">
+            <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
+            <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+        </div>
+        <div class="message other-message float-right">
+            {{messageOutput}}
+        </div>
+    </li>
+</script>
+
+<script id="message-response-template" type="text/x-handlebars-template">
+    <li>
+        <div class="message-data">
+            <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+            <span class="message-data-time">{{time}}, Today</span>
+        </div>
+        <div class="message my-message">
+            {{response}}
+        </div>
+    </li>
+</script> -->
+</body>
+
+</html>

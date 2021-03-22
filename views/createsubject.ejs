@@ -1,0 +1,300 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <meta name="description" content=""> 
+        <meta name="author" content=""> 
+        <style>#addbutton { justify-content: center; align-items: center; text-align: center; position: center; }</style>         
+        <title>CeateSubject</title>         
+        <!-- Bootstrap core CSS -->         
+        <link href="../static3/bootstrap/css/bootstrap.css" rel="stylesheet"> 
+        <!-- Bootstrap theme -->         
+        <link href="../static3/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"> 
+        <!-- Custom styles for this template -->         
+        <link href="../static3/theme.css" rel="stylesheet"> 
+        <script>
+     		 function change(){
+          const day=document.getElementById('day');
+          const date=new Date();
+          
+          var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+          
+          day.textContent=date.getDate()+", "+days[date.getDay()];
+
+          const monthyear=document.getElementById('monthyear');
+          
+          const monthNames = ["January", "February", "March", "April", "May", "June",
+                               "July", "August", "September", "October", "November", "December"
+                                ];
+          monthyear.textContent=monthNames[date.getMonth()]+" | "+date.getFullYear()
+      }
+        </script>
+
+        <script>
+            // function blend () {
+            //     if(document.getElementById("toggle").value== "enable"){
+                
+            //         for (let index = 1; index <= 10; index++) {
+            //             const element = array[index];
+            //             //document.getElementById(`go${index}`).prop('disabled', true);
+            //             //document.getElementById(`go${index}`).disable=true;
+            //             document.getElementById(`go9`).setAttribute("disabled", true);
+            //         }
+            //         document.getElementById("toggle").value = "disable"
+            //     }
+            //     else{
+            //         for (let index = 1; index <= 10; index++) {
+            //             //document.getElementById(`go${index}`).prop('disabled', false);
+            //             document.getElementById(`go9`).setAttribute("disabled", false);
+            //         }
+                   
+                  
+            //         document.getElementById("toggle").value = "enable"
+            //     }
+            // }
+
+            function addrow(){
+                var id = parseInt(document.getElementById('countRows').textContent);
+                id = document.getElementById('countRows').textContent=(id+1)+'';
+                var rowl = '<td>'+`${id}`+'</td> <td> <input type="text" name='+`Z${id*2-1}_0`+' class="form-control" placeholder="Placeholder text"></td> <td> <input type="text" name='+`Z${id*2}_0`+' class="form-control" placeholder="Placeholder text"></td>  '
+                var rowr = '<td>'+`${id}`+'</td> <td> <input type="text" name='+`Z${id*2-1}_2`+' class="form-control" placeholder="Binding Text"></td> <td> <input type="text" name='+`Z${id*2}_2`+' class="form-control" placeholder="Placeholder text"></td>  '
+                document.getElementById('Z'+`${id}`+'_1').innerHTML=rowl;
+                document.getElementById('Z'+`${id}`+'_2').innerHTML=rowr;
+                //Bindings für die Fächer ==== unnötig alles 2mal einzugeben!!!!
+            }
+
+        </script>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->         
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->         
+    </head>     
+    <body role="document" onload="change()"> 
+        <!-- Fixed navbar -->         
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">SPx</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a ><form method="GET" action="rendertotheme"> 
+                                <button type="submit" class="navbar-collapse collapse" style="background-color: transparent; border-color: transparent;">Home</button>                 
+                            </form></a>
+                        </li>
+                        <li>
+                            <a href="/index">Chat</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:3002">Call</a>
+                        </li>
+                        <li>
+                            <a href="/documents">Documents</a>
+                        </li>
+                        <li>
+                            <a href="/calendar">Calendar</a>
+                        </li>
+                        <li>
+                            <a href="/blog">Contact</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Settings</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                                <li>
+                                    <a href="#">One more separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+                <p style="text-align: right; margin-top: -35px;"><a href="/sign-in" style="color: white; text-decoration: none;">Logout&nbsp;&nbsp;<img src="../static3/ausloggen.png" width="25"></a></p>
+            </div>
+        </nav>
+        <div class="container theme-showcase" role="main"> 
+            <!-- Main jumbotron for a primary marketing message or call to action -->             
+            <div class="jumbotron"> 
+                <h1>Create your Gradetable</h1> 
+                <h2 id="day" style="text-align:right">Day</h2> 
+                <p id="monthyear" style="text-align:right"><span style="color: inherit; font-family: inherit; font-size: 30px;">Month</span><br></p> 
+            </div>             
+            <div class="page-header"> 
+                <h1>Grades</h1> 
+            </div>
+            <span name="Rows" id="countRows">3</span>  
+            <label style="margin-left:52%">
+                <input type="checkbox" id="toggle" value="disable" onclick="blend()" /> 2 Semester
+            </label>  
+            <form action="/subject" method="POST">           
+            <div class="row"> 
+                <div class="col-md-6"> 
+                    <table class="table"> 
+                        <thead> 
+                            <tr> 
+                                <th>1.S</th> 
+                                <th>Fach</th>
+                                <th>Note</th> 
+                            </tr>                             
+                        </thead>                         
+                        <tbody> 
+                            <tr> 
+                                <td>1</td>                                
+                                <td> 
+                                    <input type="text" name="Z1_0" class="form-control" placeholder="Placeholder text">
+                                </td>                                 
+                                <td>
+                                    <input type="text" name="Z2_0" class="form-control" placeholder="Placeholder text">
+                                </td>                                 
+                            </tr>                             
+                            <tr> 
+                                <td>2</td>                                
+                                <td> 
+                                    <input type="text" name="Z3_0" class="form-control" placeholder="Placeholder text">
+                                </td>                                 
+                                <td> 
+                                    <input type="text" name="Z4_0" class="form-control" placeholder="Placeholder text">
+                                </td>                                 
+                            </tr>                             
+                            <tr> 
+                                <td>3</td>                                 
+                                <td> 
+                                    <input type="text" name="Z5_0" class="form-control" placeholder="Placeholder text">
+                                </td>                                 
+                                <td> 
+                                    <input type="text" name="Z6_0" class="form-control" placeholder="Placeholder text">
+                                </td>                                 
+                            </tr>      
+                            <tr id="Z3_1"></tr>
+                            <tr id="Z4_1"></tr>
+                            <tr id="Z5_1"></tr> 
+                            <tr id="Z6_1"></tr>
+                            <tr id="Z7_1"></tr>
+                            <tr id="Z8_1"></tr> 
+                            <tr id="Z9_1"></tr>
+                            <tr id="Z10_1"></tr>
+                            <tr id="Z11_1"></tr>
+                            <tr id="Z12_1"></tr>
+                            <tr id="Z13_1"></tr>
+                            <tr id="Z14_1"></tr>
+                            <tr id="Z15_1"></tr>
+                            <tr id="Z16_1"></tr>
+                            <tr id="Z17_1"></tr>
+                            <tr id="Z18_1"></tr>                   
+                        </tbody>                         
+                    </table>  
+                                 
+                </div>                 
+                <div class="col-md-6"> 
+                    <table class="table table-striped"> 
+                        <thead> 
+                            <tr> 
+                                <th>2.S</th> 
+                                <th>Fach</th>
+                                <th>Note</th> 
+                            </tr>                             
+                        </thead>                         
+                        <tbody> 
+                            <tr id="Z0_2">
+                                <td>1</td>                            
+                                <td> 
+                                    <input type="text" name="Z1_2" class="form-control" placeholder="Placeholder text" id="go2">
+                                </td>                                 
+                                <td>
+                                    <input type="text" name="Z2_2" class="form-control" placeholder="Placeholder text" id="go3">
+                                </td>                                 
+                            </tr>                             
+                            <tr id="Z1_2"> 
+                                <td>2</td>                                
+                                <td> 
+                                    <input type="text" name="Z3_2" class="form-control" placeholder="Placeholder text" id="go5">
+                                </td>                                 
+                                <td> 
+                                    <input type="text" name="Z4_2" class="form-control" placeholder="Placeholder text" id="go6">
+                                </td>                                 
+                            </tr>                             
+                            <tr id="Z2_2"> 
+                                <td>3</td>                                 
+                                <td> 
+                                    <input type="text" name="Z5_2" class="form-control" placeholder="Placeholder text" id="go8">
+                                </td>                                 
+                                <td> 
+                                    <input type="text" name="Z6_2" class="form-control" placeholder="Placeholder text" id="go9">
+                                </td>                                 
+                            </tr>
+                            <tr id="Z3_2"></tr>
+                            <tr id="Z4_2"></tr>
+                            <tr id="Z5_2"></tr> 
+                            <tr id="Z6_2"></tr>
+                            <tr id="Z7_2"></tr>
+                            <tr id="Z8_2"></tr> 
+                            <tr id="Z9_2"></tr>
+                            <tr id="Z10_2"></tr>
+                            <tr id="Z11_2"></tr> 
+                            <tr id="Z12_2"></tr> 
+                            <tr id="Z13_2"></tr> 
+                            <tr id="Z14_2"></tr> 
+                            <tr id="Z15_2"></tr> 
+                            <tr id="Z16_2"></tr> 
+                            <tr id="Z17_2"></tr> 
+                            <tr id="Z18_2"></tr>                                
+                        </tbody>                         
+                    </table> 
+
+                   
+                        
+                </div>   
+            </div>   
+            <button style="margin-left: -15px;" type="button" class="btn btn-lg btn-default" onclick="addrow()">Add Row</button>                         
+            <button style="margin-left: -15px; display: block;
+            margin-left: auto;
+            margin-right: 0; margin-top: -50px;" type="button" class="btn btn-lg btn-default" onclick="removerow()">Remove Row</button>    
+          
+            <button style="margin-left: -15px; display: block;
+            margin-left: auto;
+            margin-right: -15px; margin-top: 5%;" type="submit" class="btn btn-lg btn-default">Save</button>   
+          </form>         
+           <form method="GET" action="rendertotheme"> 
+            <button style="display: block;
+            margin-left: -28px;
+            margin-right: auto; margin-top: -55px;" type="submit" class="btn btn-lg btn-default" >Cancel</button>                 
+        </form>                 
+        </div>  
+        
+        
+      
+
+
+        <!-- /container -->         
+        <!-- Bootstrap core JavaScript
+    ================================================== -->         
+        <!-- Placed at the end of the document so the pages load faster -->         
+        <script src="../static3/assets/js/jquery.min.js"></script>         
+        <script src="../static3/bootstrap/js/bootstrap.min.js"></script>         
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->         
+        <script src="../static3/assets/js/ie10-viewport-bug-workaround.js"></script>         
+    </body>     
+</html>

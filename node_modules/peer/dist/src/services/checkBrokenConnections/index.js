@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CheckBrokenConnections = void 0;
 const DEFAULT_CHECK_INTERVAL = 300;
 class CheckBrokenConnections {
     constructor({ realm, config, checkInterval = DEFAULT_CHECK_INTERVAL, onClose }) {
@@ -32,6 +33,8 @@ class CheckBrokenConnections {
         const { alive_timeout: aliveTimeout } = this.config;
         for (const clientId of clientsIds) {
             const client = this.realm.getClientById(clientId);
+            if (!client)
+                continue;
             const timeSinceLastPing = now - client.getLastPing();
             if (timeSinceLastPing < aliveTimeout)
                 continue;
