@@ -1,8 +1,0 @@
-{
-    "appService.zipIgnorePattern": [
-        "node_modules{,/**}",
-        ".vscode{,/**}"
-    ],
-    "appService.deploySubpath": ".",
-    "appService.defaultWebAppToDeploy": "/subscriptions/824b5e4e-7641-4533-8d03-629138f401b3/resourceGroups/test2/providers/Microsoft.Web/sites/spxsypp1"
-}
