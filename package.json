@@ -1,31 +1,26 @@
 {
-  "name": "chat",
+  "name": "kahootclone",
   "version": "1.0.0",
-  "description": "",
+  "description": "A kahoot website clone",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon server2.js",
-    "peer": "peerjs --port 3001",
-    "all": "npm-run-all --parallel server peer"
+    "start": "nodemon server/server.js"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "assert": "^2.0.0",
     "body-parser": "^1.19.0",
-    "core-util-is": "^1.0.2",
     "crypto": "^1.0.1",
-    "ejs": "^3.1.5",
-    "express": "^4.17.1",
-    "mongoose": "^5.10.7",
-    "npm-run-all": "^4.1.5",
-    "path": "^0.12.7",
-    "peer": "^0.6.1",
-    "socket.io": "^3.0.4",
-    "uuid": "^8.3.2"
+    "ejs": "^3.1.6",
+    "express": "^4.16.3",
+    "express-fileupload": "^1.2.1",
+    "moment": "^2.22.1",
+    "mongodb": "^3.0.10",
+    "mongoose": "^5.1.5",
+    "nodemon": "^2.0.12",
+    "socket.io": "^2.1.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "expect": "^23.0.1"
   }
 }
