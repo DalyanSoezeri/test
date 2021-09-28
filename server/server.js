@@ -15,6 +15,7 @@ var io = socketIO(server);
 var games = new LiveGames();
 var players = new Players();
 const fileUpload = require('express-fileupload')
+const binary = require('mongodb').Binary;
 
 //Mongodb setup
 var MongoClient = require('mongodb').MongoClient;
@@ -363,11 +364,11 @@ io.on('connection', (socket) => {
                         
                         for(var i = 0; i < playersInGame.length; i++){
                             console.log(playersInGame[i].gameData.score);
-                            if(playersInGame[i].gameData.score > fifth.score){
-                                if(playersInGame[i].gameData.score > fourth.score){
-                                    if(playersInGame[i].gameData.score > third.score){
-                                        if(playersInGame[i].gameData.score > second.score){
-                                            if(playersInGame[i].gameData.score > first.score){
+                            if(playersInGame[i].gameData.score >= fifth.score){
+                                if(playersInGame[i].gameData.score >= fourth.score){
+                                    if(playersInGame[i].gameData.score >= third.score){
+                                        if(playersInGame[i].gameData.score >= second.score){
+                                            if(playersInGame[i].gameData.score >= first.score){
                                                 //First Place
                                                 fifth.name = fourth.name;
                                                 fifth.score = fourth.score;
@@ -493,8 +494,6 @@ io.on('connection', (socket) => {
                 db.close();
             });
         });
-        
-         
     });
 
     socket.on('searchforDBvocas', function(data){
@@ -509,6 +508,20 @@ io.on('connection', (socket) => {
                 });
                 if (err) throw err;
                 socket.emit('gameNamesDataDBvocas', res);
+                db.close();
+            });
+        });
+    });
+
+    socket.on('searchforDBvocaswithID', function(data){
+        MongoClient.connect(url, function(err, db){
+            if (err) throw err;
+            var dbo = db.db('kahootDB');
+            dbo.collection("kahootGames").find().toArray(function(err, res) {
+                res = res.filter(elements => elements.id==data)
+                
+                if (err) throw err;
+                socket.emit('gameQuestiondata', res);
                 db.close();
             });
         });
@@ -540,9 +553,65 @@ io.on('connection', (socket) => {
         });
         
         
-    });    
+    });   
+    
+    socket.on('updateexisingquiz', function(data){
+        MongoClient.connect(url, async function(err, db){
+            if (err) throw err;
+            var dbo = db.db('kahootDB');
+            var idnew = 0;
+            await dbo.collection("kahootGames").find().toArray(async function(err, res) {
+                //"id":0 ,"name": name, "questions": questions, "idofold":  window.location.href.split('=')[1]
+                res = res.filter(elements => elements._id==data.idofold)
+                idnew=res[0].id
+                dbo.collection("kahootGames").deleteOne(res[0]);
+                if (err) throw err;
+
+                await dbo.collection('kahootGames').find({}).toArray(function(err, result){
+                    if(err) throw err;
+                   
+                    var game = {"id":idnew, "name": data.name, "questions": data.questions};
+                    console.log(game)
+                    dbo.collection("kahootGames").insertOne(game, function(err, res) {
+                        if (err) throw err;
+                    });
+                    db.close();
+                    socket.emit('gobacktovocas');
+                });
+            });
+        });
+        
+        
+    }); 
+    
+    socket.on('translateword', function(data){
+        var axios = require("axios").default;
+        
+        var options = {
+          method: 'POST',
+          url: 'https://microsoft-translator-text.p.rapidapi.com/translate',
+          params: {to: 'de', 'api-version': '3.0', profanityAction: 'NoAction', textType: 'plain'},
+          headers: {
+            'content-type': 'application/json',
+            'x-rapidapi-host': 'microsoft-translator-text.p.rapidapi.com',
+            'x-rapidapi-key': '45f309aa8dmsh5fac962a7da4fd0p1f5d7ajsn32432eb4de5a'
+          },
+          data: [{Text: data}]
+        };
+        
+        axios.request(options).then(function (response) {
+          
+            socket.emit("getbacktosender", response.data[0].translations[0].text)
+        }).catch(function (error) {
+            console.error(error);
+        });
+    })
+
+
+    socket.on('gotdatafromphoto', function(data){
+       console.log(data)
+    })
+    
 });
-
-
 
 

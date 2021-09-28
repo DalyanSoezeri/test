@@ -20,7 +20,7 @@ socket.on('noGameFound', function(){
 socket.on('gameQuestions', function(data){
     document.getElementById('question').innerHTML = data.q1;
     document.getElementById('answer1').innerHTML = data.a1;
-    document.getElementById('answer2').innerHTML = data.a2;
+    document.getElementById('tippifn').innerHTML = data.a2;
     document.getElementById('answer3').innerHTML = data.a3;
     document.getElementById('answer4').innerHTML = data.a4;
     var correctAnswer = data.correct;
@@ -147,7 +147,6 @@ socket.on('GameOver', function(data){
     document.getElementById('playersAnswered').innerHTML = "";
     
     
-    
     document.getElementById('winner1').style.display = "block";
     document.getElementById('winner2').style.display = "block";
     document.getElementById('winner3').style.display = "block";
@@ -160,6 +159,9 @@ socket.on('GameOver', function(data){
     document.getElementById('winner3').innerHTML = "3. " + data.num3;
     document.getElementById('winner4').innerHTML = "4. " + data.num4; 
     document.getElementById('winner5').innerHTML = "5. " + data.num5;
+
+    document.getElementById('translate').style.display = "none";
+    document.getElementById('questionNum').style.display = "none";
 });
 
 

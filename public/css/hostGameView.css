@@ -63,17 +63,21 @@
     font-family: 'Raleway', sans-serif;
 }
 #timerText{
+    margin-right: 580px;
+    margin-top:-40px;
     font-family: 'Raleway', sans-serif;
 }
 #num{
     font-family: 'Tajawal', sans-serif;
     font-size: 35px;
+
 }
 #playersAnswered{
     font-family: 'Tajawal', sans-serif;
 }
 #questionNum{
     font-family: 'Tajawal', sans-serif;
+    margin-top:10px;
 }
 
 #winner1{
@@ -110,4 +114,57 @@
     font-size: 35px;
     color: #3399ff;
     display: none;
+}
+
+
+
+.box {
+
+    border: 5px solid white;
+
+    background-color: white;
+    border-radius: 30px;
+    text-align: center;
+    top: 24%;
+    right: 25%;
+    display: block;
+    position: absolute;
+    width: 750px;
+    height: 417px;
+    filter: drop-shadow(10px 0px 4px Black);
+
+}
+
+@media only screen and (max-width: 768px) {
+   .box{
+       width: 100%;
+       margin-top: -400px;
+       position: unset;
+   }
+    #timerText{
+      font-size: 20px;
+        white-space: nowrap;
+    }
+    #questionNum{
+        white-space: nowrap;
+    }
+    #playersAnswered{
+        white-space: nowrap;
+    }
+  
+}
+
+
+
+
+.ball {
+    position: absolute;
+    border-radius: 100%;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+.winners
+{
+  font-size: 10000px;
 }

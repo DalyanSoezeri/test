@@ -105,6 +105,13 @@ route.get("/deletevoca", async(req, res) => {
     await res.redirect('back')
 })
 
+
+route.get("/textofphoto", async(req, res) => {
+    //console.log(req.query);
+   console.log(req.query);
+})
+
+
 route.post("/edithandout", (req, res) => {
     MongoClient.connect(url, async function(err, db){
         if (err) throw err;

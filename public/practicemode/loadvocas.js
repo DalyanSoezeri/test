@@ -39,77 +39,14 @@ socket.on('gameNamesData', function(data){//--------------wichtig
         p2.setAttribute("class", "stat-cards-info__title")
         p2.innerHTML = data[i].name;
         div3.appendChild(p1);
-
-      //   <div class="dots-nav">
- 
-      //   <div class="dd-dots" tabindex="-1">
-      //     <div class="three-dots"></div>
-      //     <div class="dd">
-      //       <a href="#"><div>click here for a scam</div></a>
-      //       <a href="#"><div>even more scams</div></a>
-      //       <a href="#"><div>still some money left?</div></a>
-      //     </div>
-      //   </div>
-      // </div>
-
-        var divmenunav = document.createElement("div")
-
-        divmenunav.setAttribute("class","dots-nav")
-        article.appendChild(divmenunav)
-
-        var ddcontainer = document.createElement("div")
-
-        ddcontainer.setAttribute("class","dd-dots")
-        ddcontainer.setAttribute("tabindex","-1")
-
-        divmenunav.appendChild(ddcontainer)
-
-        var threedots = document.createElement("div")
-
-        threedots.setAttribute("class","three-dots")
-
-        ddcontainer.appendChild(threedots)
-
-
-        var dddiv = document.createElement("div")
-
-        dddiv.setAttribute("class","dd")
-
-        threedots.appendChild(dddiv)
-
-
          var button2 = document.createElement("button");
         button2.innerHTML = "Start";
         button2.setAttribute("class","btn")
         button2.setAttribute('onClick', "startGame('" + data[i].id + "')");
         button2.setAttribute('id', 'gameButton');
-        dddiv.appendChild(button2);
+        article.appendChild(button2);
         
-        var form = document.createElement('form');
-        form.setAttribute('method', `GET`)
-        form.setAttribute('action', `/deletevoca`)
-        dddiv.appendChild(form)
         
-        var input = document.createElement('input');
-        input.setAttribute('type', `hidden`)
-        input.setAttribute('name', `idofvoca`)
-        input.setAttribute("value", `${data[i].id}`)
-        form.appendChild(input)
-
-        var buttondelete = document.createElement('button');
-        buttondelete.setAttribute('type', `submit`)
-        buttondelete.innerText="delete"
-        //buttondelete.setAttribute("onclick", "reload()")
-        form.appendChild(buttondelete)
-
-        var buttonedit = document.createElement('button');
-        buttonedit.setAttribute('onclick', `editvoca("${data[i]._id}")`)
-        buttonedit.innerText="edit"
-        dddiv.appendChild(buttonedit)
-
-
-        
-
         document.getElementById("vocas").appendChild(div1);
 
         // var div = document.getElementById('game-list');
@@ -164,7 +101,7 @@ socket.on('gameNamesData', function(data){//--------------wichtig
 });
 
 function startGame(data){
-    window.location.href="/host/" + "?id=" + data;
+    window.location.href="/practicemode/practicestartgame/" + "?id=" + data;
 }
 
 function editvoca(data){

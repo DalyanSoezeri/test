@@ -49,8 +49,7 @@ socket.on('gameNamesData', function(data){//--------------wichtig
         button2.setAttribute('id', 'gameButton');
         article.appendChild(button2);
         
-
-
+       
         document.getElementById("vocas").appendChild(div1);
     }
 });
@@ -146,6 +145,8 @@ function edithandout(data){
     window.location.href="/handoutcreater/edithandout/" + "?id=" + data;
  }
  
+
+
  function startGamehandout(data){
      window.location.href="/handoutcreater/choosenho/" + "?id=" + data;
  }

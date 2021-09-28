@@ -91,49 +91,7 @@ socket.on('requestHandouts', function(data){
         buttonedit.innerText="edit"
         span1.appendChild(buttonedit)
 
-    //     var button1 = document.createElement('button');
-    //     button1.setAttribute("class", "dropdown-btn transparent-btn");
-    //     button1.setAttribute("type","button" );
-    //     button1.setAttribute("title", "More info");
-
-    //     span1.appendChild(button1)
-        
-    //     var div2 = document.createElement('div');
-    //     div2.setAttribute("class", "sr-only");
-    //     div2.innerHTML="More info";
-
-    //     button1.appendChild(div2);
-
-    //    var i1 = document.createElement('i')
-    //    i1.setAttribute("data-feather","more-horizontal")
-    //     i1.setAttribute("aria-hidden","true");
-    //     button1.appendChild(i1)
-
-        // var ul = document.createElement('ul');
-        // ul.setAttribute("class", "users-item-dropdown dropdown");
-
-        // span1.appendChild(ul);
-
-        // var li1 = document.createElement('li')
-        // ul.appendChild(li1)
-        // var a1 = document.createElement("a");
-        // a1.innerHTML="Use";
-        // li1.appendChild(a1)
-
-        // var li2 = document.createElement('li')
-        // ul.appendChild(li2)
-        // var a2 = document.createElement("a");
-        // a2.innerHTML="Edit";
-        // li2.appendChild(a2)
-
-
-        // var li3 = document.createElement('li')
-        // ul.appendChild(li3)
-        // var a3 = document.createElement("a");
-        // a3.innerHTML="Delete";
-        // li3.appendChild(a3)
-
-
+    //
 
         tr1.appendChild(td4)
 

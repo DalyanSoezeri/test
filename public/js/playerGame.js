@@ -48,11 +48,11 @@ socket.on('answerResult', function(data){
 
 socket.on('questionOver', function(data){
     if(correct == true){
-        document.body.style.backgroundColor = "#4CAF50";
+        document.getElementById("boxe").style.backgroundColor = "#4CAF50";
         document.getElementById('message').style.display = "block";
         document.getElementById('message').innerHTML = "Correct!";
     }else{
-        document.body.style.backgroundColor = "#f94a1e";
+        document.getElementById("boxe").style.backgroundColor = "#f94a1e";
         document.getElementById('message').style.display = "block";
         document.getElementById('message').innerHTML = "Incorrect!";
     }
@@ -75,7 +75,7 @@ socket.on('nextQuestionPlayer', function(){
     // document.getElementById('answer3').style.visibility = "visible";
     // document.getElementById('answer4').style.visibility = "visible";
     document.getElementById('message').style.display = "none";
-    document.body.style.backgroundColor = "white";
+    document.getElementById("boxe").style.backgroundColor = "white";
     
 });
 
@@ -93,7 +93,7 @@ socket.on('playerGameData', function(data){
 });
 
 socket.on('GameOver', function(){
-    document.body.style.backgroundColor = "#FFFFFF";
+    document.getElementById("boxe").style.backgroundColor = "#FFFFFF";
     document.getElementById('answer1').style.visibility = "hidden";
     
     // document.getElementById('answer2').style.visibility = "hidden";

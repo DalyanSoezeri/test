@@ -97,6 +97,10 @@ danach fertig -->
   <script>function getdata(){
         document.getElementById('textvalue').value=document.getElementById('editor').innerHTML
   }</script>
+
+
+
+
 </head>
 
 <body>
@@ -272,9 +276,52 @@ danach fertig -->
            
           </div>
   
+          <style>
+            .dots-nav {
+          
+          display: flex;
+          
+          }
+          
+          .dots-item {
+          color: black;
+          padding: 3px;
+          }
+          
+          .three-dots:after {
+          cursor: pointer;
+          color: black;
+          content: '\2807';
+          font-size: 20px;
+          padding: 0 5px;
+          }
+          
+          
+          .dd {
+          position: absolute;
+          left: 10px;
+          background-color: black;
+          
+          outline: none;
+          opacity: 0;
+          z-index: -1;
+          max-height: 0;
+          transition: opacity 0.1s, z-index 0.1s, max-height 5s;
+          }
+          
+          .dd-dots:focus {
+          outline: none;
+          }
+          
+          .dd-dots:focus .dd {
+          opacity: 1;
+          z-index: 100;
+          max-height: 100vh;
+          transition: opacity 0.2s, z-index 0.2s, max-height 0.2s;
+          }
+          </style>
   
-  
-  
+         
   
   
   </div>
