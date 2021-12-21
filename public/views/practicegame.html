@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voca.</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../../Pictures/icon.png"/>
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="../../dashboard/css/style.min.css">
+  <link rel="stylesheet" href="../alerts/style.css" />
+  <script src="../../alerts/cute-alert.js"></script>
+  <link rel = "stylesheet" href = "../css/buttons_createquestion.css">
+</head>
+
+<body onload="connect('<%=id%>')">
+
+  <div class="layer"></div>
+<!-- ! Body -->
+<a class="skip-link sr-only" href="#skip-target">Skip to content</a>
+<div class="page-flex">
+  <!-- ! Sidebar -->
+ 
+  <div class="main-wrapper">
+    <!-- ! Main nav -->
+    <nav class="main-nav--bg">
+  <div class="container main-nav">
+    <div class="main-nav-start">
+     
+    </div>
+
+  
+    <div class="main-nav-end">
+      <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+        <span class="sr-only">Toggle menu</span>
+      </button>
+      <a class="logo-wrapper" title="Home">
+        <span class="sr-only">Home</span>
+        <img id="iconpic" src="../../Pictures/image0white.png" width="5%" alt="">
+        <div class="logo-text">
+        
+            <span class="logo-title">Voca.</span>
+        </div>
+    
+    </a>   
+     
+      <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
+        <span class="sr-only">Switch theme</span>
+        <i class="sun-icon" data-feather="sun" aria-hidden="true"></i>
+        <i class="moon-icon" data-feather="moon" aria-hidden="true"></i>
+      </button>
+    
+    
+    </div>
+  </div>
+</nav>
+    <!-- ! Main -->
+    <main class="main users chart-page" id="skip-target">
+      <div class="container">
+        <center>
+  <h3 class="main-title">Translate the word: </h3> 
+  <h5 class="main-title" id="totranslate"></h5>
+  <br>
+  <br>
+  <div class="search-wrapper">
+    <input type="text" id="enteredvocab" placeholder="Enter translation" required>
+  </div>
+</div>
+<br>
+
+ <center> 
+  <button class="buttoneffect" onclick="nextquestion()"><a style="font-size: 15px" class="main-title">Next</a></button>
+  <button class="buttoneffect"  onclick="previousquestion()"><a  style="font-size: 15px" class="main-title">Previous</a></button>
+</center>
+
+<script>
+  document.getElementById('enteredvocab')
+    .addEventListener('keyup', function(event) {
+        if (event.code === 'Enter')
+        {
+          nextquestion()
+        }
+    });
+
+   
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape'){ //|| event.key==="Enter") {
+  document.getElementById("alert-wrapper").style.visibility="hidden"
+  }
+})
+
+  </script>
+
+<br>
+<br>
+<br>
+<center>
+  <div id="getwrongvocas"></div>
+</center>
+  
+</div>
+
+</center>
+
+
+       
+      </div>
+    </main>
+    <!-- ! Footer -->
+   
+  </div>
+</div>
+<script src = "../../socket.io/socket.io.js"></script>
+<script src = "../practicemode/practicestartgame/loadgame.js"></script>
+
+<!-- Chart library -->
+<script src="../../dashboard/plugins/chart.min.js"></script>
+<!-- Icons library -->
+<script src="../../dashboard/plugins/feather.min.js"></script>
+<!-- Custom scripts -->
+<script src="../../dashboard/js/script.js"></script>
+</body>
+
+</html>
+
+      

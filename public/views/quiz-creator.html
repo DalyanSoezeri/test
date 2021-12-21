@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../../Pictures/icon.png"/>
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="../../dashboard/css/style.min.css">
+
+  <title>Creator | KahootClone</title>
+  <!-- <link rel = "stylesheet" href = "../../css/quizCreator.css"> -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
+  <link rel = "stylesheet" href = "../../css/buttons_createquestion.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
+
+
+
+  
+</head>
+
+<body onload = "setBGColor('<%=userid%>')">
+  <div class="layer"></div>
+<!-- ! Body -->
+<a class="skip-link sr-only" href="#skip-target">Skip to content</a>
+<div class="page-flex">
+  <!-- ! Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-start">
+        <div class="sidebar-head">
+            <a href="/" class="logo-wrapper" title="Home">
+                <span class="sr-only">Home</span>
+                <img src="../../Pictures/image0white.png" width="40%" alt="">
+                <div class="logo-text">
+                
+                    <span class="logo-title">Voca.</span>
+                </div>
+
+            </a>
+            <br>
+            <button  class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                <span class="sr-only">Toggle menu</span>
+                <span class="icon menu-toggle" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div cass="sidebar-body">
+          <ul class="sidebar-body-menu">
+              <li>
+                  <a class="active" href="/"><span class="icon home" aria-hidden="true"></span>Home</a>
+              </li>
+              <li>
+                  <a class="show-cat-btn" href="##">
+                      <span class="icon document" aria-hidden="true"></span>My Games/Vocas
+                      <span class="category__btn transparent-btn" title="Open list">
+                          <span class="sr-only">Open list</span>
+                          <span class="icon arrow-down" aria-hidden="true"></span>
+                      </span>
+                  </a>
+                  <ul class="cat-sub-menu">
+                      <li>
+                        <form action="/showvocas" method="get">
+                          <a><button style="background-color: transparent; color: #ffffff;" type="submit">All Vocas</button></a>
+                          
+                        </form>
+                      </li>
+                      <li>
+                          <form action="/createquiz" method="get">
+                            <a><button style="background-color: transparent; color: #ffffff;" type="submit">Add Voca</button></a>
+                            
+                          </form>
+                      </li>
+                  </ul>
+              </li>
+              <li>
+                <a class="show-cat-btn" href="##">
+                    <span class="icon paper" aria-hidden="true"></span>Handouts
+                    <span class="category__btn transparent-btn" title="Open list">
+                        <span class="sr-only">Open list</span>
+                        <span class="icon arrow-down" aria-hidden="true"></span>
+                    </span>
+                </a>
+                <ul class="cat-sub-menu">
+                    <li>
+                      <form action="/showhandouts" method="get">
+                        <a><button style="background-color: transparent; color: #ffffff;" type="submit">All Handouts</button></a>
+                        
+                      </form>
+                    </li>
+                    <li>
+                      <form action="/createhandout" method="get">
+                        <a><button style="background-color: transparent; color: #ffffff;" type="submit">Add new Handouts</button></a>
+                        
+                      </form>
+                    </li>
+                </ul>
+            </li>
+              <li>
+                  <a class="show-cat-btn" href="##">
+                      <span class="icon folder" aria-hidden="true"></span>Classes
+                      <span class="category__btn transparent-btn" title="Open list">
+                          <span class="sr-only">Open list</span>
+                          <span class="icon arrow-down" aria-hidden="true"></span>
+                      </span>
+                  </a>
+                  <ul class="cat-sub-menu">
+                      <li> 
+                        <a><button style="background-color: transparent; color: #ffffff;">All Classes</button></a>
+                      </li>
+                      <li>
+                        <a><button style="background-color: transparent; color: #ffffff;" onclick="alertbox()" >Add Classes</button></a>
+                    </li>
+                  </ul>
+              </li>
+            
+              <li>
+                <a class="show-cat-btn" href="##">
+                  <img src="../dashboard/img/controlersymbol.png" width="25" alt="">
+                    <span class="icon game" aria-hidden="true"></span>Play
+                    <span class="category__btn transparent-btn" title="Open list">
+                        <span class="sr-only">Open list</span>
+                        <span class="icon arrow-down" aria-hidden="true"></span>
+                    </span>
+                </a>
+                <ul class="cat-sub-menu">
+                    <li>
+                        <a href="../index.html">Excercise Mode</a>
+                    </li>
+                    <li>
+                      <form action="/practicemode" method="get">
+                        <a><button style="background-color: transparent; color: #ffffff;" type="submit">Practise Mode</button></a>
+                        
+                      </form>
+                    </li>
+                </ul>
+            </li>
+            
+          </ul>
+          <span class="system-menu__title">system</span>
+          <ul class="sidebar-body-menu">
+            
+              <li>
+                  <a href="##"><span class="icon setting" aria-hidden="true"></span>Settings</a>
+              </li>
+          </ul>
+      </div>
+    </div>
+   
+</aside>
+  <div class="main-wrapper">
+    <!-- ! Main nav -->
+    <nav class="main-nav--bg">
+  <div class="container main-nav">
+    <div class="main-nav-start">
+      <div class="search-wrapper">
+        <i data-feather="search" aria-hidden="true"></i>
+        <input type="text" id="titleofvoca" placeholder="Enter keywords ..." required>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('titleofvoca')
+        .addEventListener('keyup', function(event) {
+            if (event.code === 'Enter')
+            {
+              searchforVoca()
+            }
+        });
+    
+      </script>
+    <div class="main-nav-end">
+      <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+        <span class="sr-only">Toggle menu</span>
+        <span class="icon menu-toggle--gray" aria-hidden="true"></span>
+      </button>
+    
+      <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
+        <span class="sr-only">Switch theme</span>
+        <i class="sun-icon" data-feather="sun" aria-hidden="true"></i>
+        <i class="moon-icon" data-feather="moon" aria-hidden="true"></i>
+      </button>
+    
+      <div class="nav-user-wrapper">
+        <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
+          <span class="sr-only">My profile</span>
+          <span class="nav-user-img">
+            <picture><source srcset="./img/avatar/avatar-illustrated-02.webp" type="image/webp"><img src="./img/avatar/avatar-illustrated-02.png" alt="User name"></picture>
+          </span>
+        </button>
+        <ul class="users-item-dropdown nav-user-dropdown dropdown">
+          <li><a href="##">
+              <i data-feather="user" aria-hidden="true"></i>
+              <span>Profile</span>
+            </a></li>
+          <li><a href="##">
+              <i data-feather="settings" aria-hidden="true"></i>
+              <span>Account settings</span>
+            </a></li>
+          <li><a class="danger" href="../index.html">
+              <i data-feather="log-out" aria-hidden="true"></i>
+              <span>Log out</span>
+            </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+    <!-- ! Main -->
+    <main class="main users chart-page" id="skip-target">
+      <div class="container">
+        
+        <h2 class="main-title">Voca Creator</h2>
+
+        <div class="form-field">
+            <h5 class="main-title" id = "quizTitle">Voca Title: </h5>
+            <input id = "name" type = "text" name="name" autofocus/>
+        </div>
+        <br>
+        <select name="selectclass" id="selectclass">
+          <option value="1">Classes</option>
+        </select>
+
+        <br>
+        <br>
+        <div id = "allQuestions">
+            <div id="question-field">
+                <label>Word 1: </label>
+                <input class = "question" id = "q1" type = "text" autofocus/>
+                <br>
+                <br>
+                <label>translation </label>
+                <input id = "1a1" type = "text" autofocus/>
+              
+                <label style="visibility: hidden;">Correct Answer (1-4) :</label>
+                <input style="visibility: hidden;" class = "correct" id = "correct1"  type = "number" autofocus value="1"/>
+            </div>
+        </div>
+        <br>
+        <button class="buttoneffect" onclick = "addQuestion()"><a style="font-size: 15px" class="main-title"> Add another question </a></button>
+          <button class="buttoneffect"  onclick = "addSentence()"><a  style="font-size: 15px" class="main-title">Add another Sentence</a></button>
+
+
+        <div class="form-field">
+            <button  class="buttoneffect"  id="exit" onclick = " cancelQuiz()"><a  style="font-size: 15px"class="main-title">Exit</a></button>
+        </div>
+
+          <button  class="buttoneffect"  onclick="updateDatabase('<%=userid%>')"><a  style="font-size: 15px" class="main-title">Create </a></button>
+      </center>
+
+        <div class="conatiner mt-5">
+          <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-3">
+
+
+                  <input type="file" accept=".xls,.xlsx" id="input"/>
+              </div>
+              <div class="col-md-2">
+                  <button class="stat-cards-icon purple" id="button">Convert</button>
+              </div>
+  
+    </body>
+
+
+      </div>
+    </main>
+    <!-- ! Footer -->
+    <footer class="footer">
+  <div class="container footer--flex">
+    <div class="footer-start">
+      <p>2021 © Voca. <a href="elegant-dashboard.com" target="_blank"
+          rel="noopener noreferrer"></a></p>
+    </div>
+    <ul class="footer-end">
+    
+    </ul>
+  </div>
+</footer>
+  </div>
+</div>
+<script src = "../../socket.io/socket.io.js"></script>
+<script src = "../js/quizCreator.js"></script>
+
+<!-- Chart library -->
+<script src="../../dashboard/plugins/chart.min.js"></script>
+<!-- Icons library -->
+<script src="../../dashboard/plugins/feather.min.js"></script>
+<!-- Custom scripts -->
+<script src="../../dashboard/js/script.js"></script>
+
+</body>
+
+</html>
