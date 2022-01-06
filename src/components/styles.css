@@ -1,0 +1,36 @@
+.App2 {
+    font-family: sans-serif;
+    text-align: center;
+    padding-bottom: 0px;
+  }
+  .user {
+    text-align: left;
+    margin: 30px 20px;
+  }
+  .user div {
+    padding: 10px;
+    margin: 10px;
+    background: rgb(118, 165, 196);
+    border-radius: 10px;
+  }
+  .page-deets {
+    margin-top: 0px;
+  }
+  #container1{
+    height: 70%;
+    width: 100%;
+    
+   
+    overflow: hidden;
+}
+
+ #container2{
+    height: 70%;
+    width: 100%;
+    overflow: auto;
+    padding-right: 20px;
+    
+}
+
+/* ::-webkit-scrollbar {display:none;} */
+  
