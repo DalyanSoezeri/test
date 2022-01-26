@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Game | KahootClone</title>
+        <link rel = "stylesheet" href = "../../css/playerGameView.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    </head>
+    <body onload="connect('<%=id%>')">
+
+
+
+
+
+    <div class="area" >
+
+
+        <ul class="circles">
+            <div class="boxe" id="boxe">
+            <center>
+                <div id = "stats">
+                    <h4 id = "nameText">Name: </h4>
+                    <h4 id = "scoreText">Score: </h4>
+                    <h4 id = "rankText"></h4>
+                </div>
+
+
+                <h2 id = "message"></h2>
+                <input id="anwser">
+                <br>
+                <button style="width: 50px; height: 50px;" onclick = "answerSubmitted(1)" id = "answer1" class = "button">Submit</button>
+
+                <br>
+                <button style="visibility: hidden; width: 0%; height: 0%;" id = "answer2" class = "button"></button>
+                <br>
+                <button style="visibility: hidden; width: 0%; height: 0%;" id = "answer3" class = "button"></button>
+                <button style="visibility: hidden; width: 0%; height: 0%;" id = "answer4" class = "button"></button>
+
+            </center>
+            <br>
+            <br>
+        </div>
+
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div >
+
+
+
+        <script src = "../../socket.io/socket.io.js"></script>
+        <script src = "../../js/libs/jqueryLibrary.js"></script>
+        <script src = "../../js/libs/deparam.js"></script>
+        <script src = "../../js/playerGame.js"></script>
+    </body>
+</html>

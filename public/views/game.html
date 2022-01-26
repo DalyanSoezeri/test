@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Game | KahootClone</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel = "stylesheet" href = "../../css/hostGameView.css">
+        <link rel = "stylesheet" href = "anibox.scss">
+        <link rel="icon" type="image/png" href="../../Pictures/icon.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
+
+    </head>
+    <body onload="connect('<%=id%>')">
+
+
+
+
+
+
+<center>
+
+    
+
+    <div class="box">
+        <div class="content">
+            <h4 style="margin-left: 600px" id = "questionNum">Question 1 / x</h4>
+            <h4  style="margin-left: 600px" id = "playersAnswered">Players Answered: 0 / x</h4>
+            <h4 style="margin-left: 600px" id = "tippifn">Question 1 / x</h4>
+            <h3 id = "timerText">Time Left:<span id = "num"> 20</span></h3>
+
+
+            <div class = "square" id = "square1"></div>
+            <div class = "square" id = "square2"></div>
+            <div class = "square" id = "square3"></div>
+            <div class = "square" id = "square4"></div>
+
+            <div id="winners">
+                <h4 id = "winnerTitle">Top 5 Players</h4>
+                <h3 id = "winner1">1.</h3>
+                <h3 id = "winner2">2.</h3>
+                <h3 id = "winner3">3.</h3>
+                <h3 id = "winner4">4.</h3>
+                <h3 id = "winner5">5.</h3>
+            </div>
+
+            <h2 id="translate">Translate the word: </h2><h2 id = "question">Question</h2>
+            
+            <br>
+            <button onclick = "nextQuestion()" id = "nextQButton">Next Question</button>
+            <h3 style="visibility: hidden;" id = "answer1">Answer</h3>
+            <br>
+            <h3 style="visibility: hidden;" id = "answer2">Answer</h3>
+            <br>
+            <h3 style="visibility: hidden;" id = "answer3">Answer</h3>
+            <br>
+            <h3 style="visibility: hidden;" id = "answer4">Answer</h3>
+
+
+        </div>
+    </div>
+
+
+</center>
+
+
+        <script src="animatedbackground.js"> </script>
+        <script src = "../../socket.io/socket.io.js"></script>
+        <script src = "../js/libs/jqueryLibrary.js"></script>
+        <script src = "../js/libs/deparam.js"></script>
+        <script src = "../js/hostGame.js"></script>
+    </body>
+</html>

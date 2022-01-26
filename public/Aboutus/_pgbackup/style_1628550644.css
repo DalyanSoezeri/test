@@ -1,0 +1,9 @@
+.heading {
+    font-size: 60px;
+    color: white;
+}
+
+.heading span {
+    font-style: italic;
+    font-size: 30px;
+}
