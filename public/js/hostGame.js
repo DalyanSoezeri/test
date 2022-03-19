@@ -16,6 +16,20 @@ function connect(id){
     });
 }
 
+
+function myFunction() {
+    if (document.getElementById("bar1").style.backgroundColor=="rgb(22, 22, 36)"){
+         document.getElementById("bar1").style.backgroundColor="#0061f7"
+         document.getElementById("bar2").style.backgroundColor="#0061f7"
+     }
+     else
+     {
+          document.getElementById("bar1").style.backgroundColor="#161624"
+          document.getElementById("bar2").style.backgroundColor="#161624"
+     }
+  }
+  
+
 socket.on('noGameFound', function(){
    window.location.href = '../../';//Redirect user to 'join game' page
 });
@@ -28,6 +42,7 @@ socket.on('gameQuestions', function(data){
     document.getElementById('answer4').innerHTML = data.a4;
     var correctAnswer = data.correct;
     document.getElementById('playersAnswered').innerHTML = "Players Answered 0 / " + data.playersInGame;
+   
     currentcorrect(data.a1);
     updateTimer();
 });
@@ -101,28 +116,28 @@ socket.on('questionOver', function(playerData, correct){
     answer3 = answer3 / total * 100;
     answer4 = answer4 / total * 100;
     
-    document.getElementById('square1').style.display = "inline-block";
-    document.getElementById('square2').style.display = "inline-block";
-    document.getElementById('square3').style.display = "inline-block";
-    document.getElementById('square4').style.display = "inline-block";
+    // document.getElementById('square1').style.display = "inline-block";
+    // document.getElementById('square2').style.display = "inline-block";
+    // document.getElementById('square3').style.display = "inline-block";
+    // document.getElementById('square4').style.display = "inline-block";
     
-    document.getElementById('square1').style.height = answer1 + "px";
-    document.getElementById('square2').style.height = answer2 + "px";
-    document.getElementById('square3').style.height = answer3 + "px";
-    document.getElementById('square4').style.height = answer4 + "px";
+    // document.getElementById('square1').style.height = answer1 + "px";
+    // document.getElementById('square2').style.height = answer2 + "px";
+    // document.getElementById('square3').style.height = answer3 + "px";
+    // document.getElementById('square4').style.height = answer4 + "px";
     
     document.getElementById('nextQButton').style.display = "block";
 
     document.getElementById('translate').innerHTML="Correct awnser: ";
-    document.getElementById('question').innerHTML=kagrad; 
+    document.getElementById('question').innerHTML=""+correct; 
 });
 
 function nextQuestion(){
     document.getElementById('nextQButton').style.display = "none";
-    document.getElementById('square1').style.display = "none";
-    document.getElementById('square2').style.display = "none";
-    document.getElementById('square3').style.display = "none";
-    document.getElementById('square4').style.display = "none";
+    // document.getElementById('square1').style.display = "none";
+    // document.getElementById('square2').style.display = "none";
+    // document.getElementById('square3').style.display = "none";
+    // document.getElementById('square4').style.display = "none";
     
     document.getElementById('answer1').style.filter = "none";
     document.getElementById('answer2').style.filter = "none";
@@ -132,6 +147,8 @@ function nextQuestion(){
     document.getElementById('playersAnswered').style.display = "block";
     document.getElementById('timerText').style.display = "block";
     document.getElementById('num').innerHTML = " 20";
+    document.getElementById('translate').innerHTML= "Translate the word "
+   
     socket.emit('nextQuestion'); //Tell server to start new question
 }
 

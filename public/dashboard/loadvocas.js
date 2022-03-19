@@ -1,7 +1,7 @@
 
 var socket = io();
-
 function connect(userid){
+    
     socket.on('connect', function(){
         //alert(userid)
         socket.emit('requestDbNames', userid);//Get database names to display to user
@@ -77,8 +77,10 @@ socket.on('gameNamesData', function(data){//--------------wichtig
        
         document.getElementById("vocas").appendChild(div1);
     }
-});
 
+
+
+});
 
 socket.on('requestHandouts', function(data){
     var length = 8;

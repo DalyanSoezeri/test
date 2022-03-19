@@ -1,5 +1,5 @@
 var socket = io();
-var questionNum = 0; //Starts at two because question 1 is already present
+var questionNum = 1; //Starts at two because question 1 is already present
 
 function setBGColor(id){
     var randColor = randomColor();
@@ -28,8 +28,7 @@ function updateDatabase(userid){
     for(var i = 1; i <= questionNum; i++){
         var question = document.getElementById('q' + i).value;
         var answer1 = document.getElementById(i + 'a1').value;
-        // answer1=answer1.toLowerCase();
-        // console.log(answer1);
+       
         if(document.getElementById(i + 'a2')==null){
             var answer2 = "";   
         }
@@ -37,15 +36,17 @@ function updateDatabase(userid){
             var answer2 = document.getElementById(i + 'a2').value
         }
         
-        // var answer3 = document.getElementById(i + 'a3').value;
-        // var answer4 = document.getElementById(i + 'a4').value;
+        
         var correct = document.getElementById('correct' + i).value;
         var answers = [answer1, answer2]//, answer3, answer4];
         questions.push({"question": question, "answers": answers, "correct": correct})
     }
     
-    var quiz = {id: 0, "name": name, "questions": questions, "userid": userid, "class":document.getElementById("selectclass").value};
-    socket.emit('newQuiz', quiz);
+    //document.getElementById("question").value=JSON.stringify(questions)
+    var quiz = {id: 0, "name": name, "questions": questions, "userid": userid, "class":document.getElementById("selectclass").value, "played":0};
+    document.getElementById("completegame").value=JSON.stringify(quiz)
+   
+    document.getElementById("startoperation").click()
 }
 
 var insertinto = 0;

@@ -88,7 +88,7 @@ tre.appendChild(th5)
         
  }
 
- socket.emit('requestDbNames', id);//Get database names to display to user
+ socket.emit('requestDbNames', id);
  socket.emit('requestHandouts', id);
    
 })
@@ -96,7 +96,6 @@ tre.appendChild(th5)
 socket.on('gameNamesData', async function(data){
 
     for(var i = 0; i < data.length; i++){
-
 
          var div1 = document.createElement("div");
         div1.setAttribute("class", "col-md-6 col-xl-3");
@@ -118,9 +117,6 @@ socket.on('gameNamesData', async function(data){
          var div3 = document.createElement("div");
          div3.setAttribute("class", "stat-cards-info")
          article.appendChild(div3);
-
-//         // <p class="stat-cards-info__num">1478 286</p>
-//         // <p class="stat-cards-info__title">Total visits</p>
 
          var p1 = document.createElement("p");
          p1.setAttribute("class", "stat-cards-info__num")
@@ -153,7 +149,7 @@ socket.on('gameNamesData', async function(data){
          buttonstart.setAttribute("type", "submit")
          form.appendChild(buttonstart)
         
-         if(data[i].class !== undefined){
+         if(data[i].class !== undefined && data[i].class !== "1"){
             document.getElementById("game"+data[i].class).appendChild(div1);
          }
      }
@@ -164,7 +160,7 @@ socket.on('gameNamesData', async function(data){
  socket.on('requestHandouts', async function(data){
 
     for(var i = 0; i < data.length; i++){
-        console.log(data[i]);
+        
 
         var tr1 = document.createElement("tr");
         var td1 = document.createElement('td');
@@ -248,7 +244,3 @@ function edithandout(data){
  function startGamehandout(data){
      window.location.href="/views/choosenho.html/" + "?id=" + data;
  }
-
- function searchforVoca(){
-    window.location.href="/SearchforVocas/" + "?title=" + document.getElementById("titleofvoca").value;
-}

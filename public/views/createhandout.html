@@ -43,9 +43,13 @@
         </div>
         <div cass="sidebar-body">
           <ul class="sidebar-body-menu">
-              <li>
-                  <a class="active" href="/"><span class="icon home" aria-hidden="true"></span>Home</a>
-              </li>
+            <li>
+                 
+              <form action="/renderdashboard" method="get">
+                <a>   <span class="icon home" aria-hidden="true"></span><button style="background-color: transparent; color: #ffffff;" type="submit">Home</button></a>
+                
+              </form>
+            </li>
               <li>
                   <a class="show-cat-btn" href="##">
                       <span class="icon document" aria-hidden="true"></span>My Games/Vocas
@@ -86,7 +90,7 @@
                     </li>
                     <li>
                       <form action="/createhandout" method="get">
-                        <a><button style="background-color: transparent; color: #ffffff;" type="submit">Add new Handouts</button></a>
+                        <a class="active"><button style="background-color: transparent; color: #ffffff;" type="submit">Add new Handouts</button></a>
                         
                       </form>
                     </li>
@@ -148,19 +152,22 @@
     <!-- ! Main nav -->
     <nav class="main-nav--bg">
   <div class="container main-nav">
-    <div class="main-nav-start">
-      <div class="search-wrapper">
-        <i data-feather="search" aria-hidden="true"></i>
-        <input type="text" id="titleofvoca" placeholder="Enter keywords ..." required>
+    <form action="/searchvocas" method="get">
+      <div class="main-nav-start">
+        <div class="search-wrapper">
+          <i data-feather="search" aria-hidden="true"></i>
+          <input type="text" name="titleofvoca" id="titleofvoca" placeholder="Enter Voca name ..." required>
+        </div>
       </div>
-    </div>
+      <button style="visibility: hidden;" type="submit" id="subsearch"></button>
+    </form>
 
     <script>
       document.getElementById('titleofvoca')
         .addEventListener('keyup', function(event) {
             if (event.code === 'Enter')
             {
-              searchforVoca()
+              document.getElementById("subsearch").click();
             }
         });
     

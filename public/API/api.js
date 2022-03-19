@@ -1,12 +1,15 @@
 const express = require("express");
 const mogoose = require("mongoose");
 const User = require("../models/User");
+const Contacts = require("../models/Contact");
 const Classu = require("../models/Class");
 const route = express.Router();
 const crypt = require("crypto");
 const mongoose = require("mongoose");
 var MongoClient = require("mongodb").MongoClient;
 let ejs = require("ejs");
+const si = require("systeminformation")
+const sorterjs = require("sort-nested-json");
 
 route.get("/createAccount", async (req, res) => {
   let user = {};
@@ -14,25 +17,19 @@ route.get("/createAccount", async (req, res) => {
   user.email = req.query.email;
   user.password = crypt.createHash('sha256').update(req.query.pass).digest('hex');
   user.profilepicture = req.query.picture;
-
-  console.log('Account creation: ')
-  console.log(user);
   let userModel = new User(user);
   await userModel.save();
   res.render("login");
-  // //res.redirect('../static4/sign-in.html');
 });
 
-route.get("/loginAccount", async (req, res) => {
+route.post("/loginAccount", async (req, res) => {
   let user = {};
-  user.email = req.query.email;
+  user.email = req.body.email;
   user.password = crypt
     .createHash("sha256")
-    .update(req.query.pass)
+    .update(req.body.pass)
     .digest("hex");
   var found = false;
-  console.log("Login try: ");
-  console.log(user);
   let userModel = new User(user);
   var userf;
   await User.findOne(user, function (err, res) {
@@ -44,6 +41,7 @@ route.get("/loginAccount", async (req, res) => {
     }
   });
 
+ setTimeout(() => {
   if (found) {
     req.session.userid = userf._id;
     req.session.uemail = userf.email;
@@ -57,6 +55,7 @@ route.get("/loginAccount", async (req, res) => {
   } else {
     res.render("login");
   }
+ }, 1750);
 });
 
 const mongodb = require("mongodb");
@@ -84,6 +83,7 @@ route.post("/upload", (req, res) => {
 
   insertFile(file, res);
 
+  res.redirect("back")
   res.render("dashboard", {
     userid: req.session.userid,
     uemail: req.session.uemail,
@@ -122,7 +122,6 @@ route.get("/usehandout", async (req, res) => {
 });
 
 route.get("/deletevoca", async (req, res) => {
-  //console.log(req.query);
   let file = {};
   file.id = req.query.idofvoca;
   await MongoClient.connect(url, async function (err, db) {
@@ -158,6 +157,15 @@ route.get("/saveclass", async (req, res) => {
 route.get("/editvoca", async (req, res) => {
     res.render("editvoca", {id: req.query.idofvoca, picid: req.session.picid})
 });
+
+route.get("/renderdashboard", async (req, res) => {
+  res.render("dashboard", {
+    userid: req.session.userid,
+    uemail: req.session.uemail,
+    picid: req.session.picid
+  });
+});
+
 
 route.get("/showvocas", async (req, res) => {
   res.render("create", { id: req.session.userid, picid: req.session.picid});
@@ -262,19 +270,6 @@ route.get("/textofphoto", async (req, res) => {
 });
 
 route.post("/edithandout", (req, res) => {
-  
-  // MongoClient.connect(url, async function (err, db) {
-  //   if (err) throw err;
-  //   var dbo = db.db("Voca");
-  //   await dbo
-  //     .collection("files")
-  //     .updateOne(
-  //       {},
-  //       { $set: { text: req.body.textvalue, title: req.body.title } }
-  //     );
-  // });
-
-
   MongoClient.connect(url, async function(err, db){
     if (err) throw err;
     var dbo = db.db('Voca');
@@ -324,6 +319,40 @@ function insertFile(file, res) {
   );
 }
 
+route.get("/quizcreation", (req, res) => {
+
+  var data = JSON.parse(req.query.game)
+  
+  MongoClient.connect(url, function(err, db){
+    if (err) throw err;
+    var dbo = db.db('kahootDB');
+    dbo.collection('kahootGames').find({}).toArray(function(err, result){
+        if(err) throw err;
+        var num = Object.keys(result).length;
+        if(num == 0){
+          data.id = 1
+          num = 1
+        }else{
+          data.id = result[num -1 ].id + 1;
+        }
+        var game = data;
+        dbo.collection("kahootGames").insertOne(game, function(err, res) {
+            if (err) throw err;
+            db.close();
+        });
+        db.close();
+        
+    });
+    
+  });
+
+  res.render("dashboard", {
+    userid: req.session.userid,
+    uemail: req.session.uemail,
+    picid: req.session.picid
+  });
+});
+
 route.get("/createquiz", (req, res) => {
   res.render("quiz-creator", {
     userid: req.session.userid,
@@ -339,6 +368,187 @@ route.get("/gottoedith", (req, res) => {
     picid: req.session.picid
   });
 });
+
+route.get("/searchvocas", (req, res) => {
+ console.log("query", req.query)
+ res.render("searchforvocas", {
+  userid: req.session.userid,
+  uemail: req.session.uemail,
+  picid: req.session.picid,
+  vocaname: req.query.titleofvoca
+});
+});
+
+
+route.post("/incomingcontact", async (req, res) => {
+  //console.log(req.body)
+
+  var contact = {};
+  contact.name = req.body.name;
+  contact.email = req.body.email
+  contact.message = req.body.message
+
+  let contactModel = new Contacts(contact);
+  await contactModel.save();
+ });
+
+ route.get("/admin", async (req, res) => {
+  //console.log(req.body)
+    res.render("adminlogin")
+ });
+
+
+ route.post("/loginadmin", async (req, res) => {
+ 
+  if(req.body.username=="admin" && req.body.password == "admin"){
+    await getnvocas()
+    await getnhandouts()
+    await getnuser()
+    await getnclasses()
+
+
+    
+    // var usedmem;
+    // si.mem().then((x)=>{usedmem = x.used/(1024*1024*1024)+ " GiB"})
+    // var totalmem;
+    // si.mem().then((x)=>{totalmem = x.total/(1024*1024*1024)+ " GiB"})
+    // var usedcached;
+    // si.mem().then((x)=>{usedcached = x.chached/(1024*1024*1024)+ " GiB"})
+
+    // var speedavgcpu;
+    // si.cpuCurrentSpeed().then((x)=>{speedavgcpu = x.avg})
+    // var speedmincpu;
+    // si.cpuCurrentSpeed().then((x)=>{speedmincpu = x.min})
+    // var speedmaxcpu;
+    // si.cpuCurrentSpeed().then((x)=>{speedmaxcpu = x.max})
+
+    // var tempretureavg;
+    // si.cpuTemperature().then((x)=>{tempretureavg = x.main})
+
+    // var tempreturemax;
+    // si.cpuTemperature().then((x)=>{tempreturemax = x.max})
+
+    var dataofg = [];
+
+    mongoClient.connect(
+      "mongodb+srv://Dalyan:Dalyan@cluster0.3r4k7.mongodb.net/DatabaseDA?retryWrites=true&w=majority",
+      { useNewUrlParser: true },
+      (err, client) => {
+        if (err) {
+          return err;
+        } else {
+          let db = client.db("kahootDB");
+          db.collection("kahootGames").find().toArray(function(err, res) {
+            
+            sorterjs.sort(res.filter(x=>x.played!==undefined&&!isNaN(x.played))).desc("played").forEach(element=>{
+              dataofg.push({name:element.name, played:element.played})
+            })
+            if (err) throw err;
+        });
+        }
+      }
+    );
+
+
+   
+
+    setTimeout(async function() {
+      //console.log(dataofg)
+      res.render("admindashboard", {
+        Members: nuser, 
+        Handouts: nhandouts,
+        Classes: nclasses,
+        Vocas:nvocas,
+        data:JSON.stringify(dataofg)
+      })
+    }, 2000);
+
+   
+  }
+ });
+
+ 
+
+ async function getnclasses(){
+  await Classu.find({}, function (err, res) {
+    nclasses = res.length
+  });
+ }
+ 
+
+ async function getnuser(){
+ await User.find({}, function (err, res) {
+  nuser=res.length
+ });
+}
+
+
+async function getnhandouts(){
+  MongoClient.connect(url, async function(err, db){
+    if (err) throw err;
+
+    var dbo =  db.db('Voca');
+  
+     dbo.collection("files").find().toArray(function(err, res) {
+     
+       nhandouts = res.length;
+    });
+
+    });
+}
+
+var nvocas;
+var nhandouts;
+var nuser;
+var nclasses;
+
+async function getnvocas(){
+  
+    MongoClient.connect(url, async function(err, db){
+    if (err) throw err;
+
+    var dbo =  db.db('kahootDB');
+  
+     dbo.collection("kahootGames").find().toArray(function(err, res) {
+     
+       nvocas = res.length;
+    });
+
+    });
+}
+
+
+route.get("/getcontacttable", async (req, res) => {
+ 
+  var endstring = "";
+ 
+  await Contacts.find({}, function (err, res) {
+    
+    
+  res.forEach(element => {
+    endstring+= `;${element.email}^${element.name}^${element.message}^${element._id}`
+  });
+
+  endstring = endstring.substring(1,endstring.length)
+    
+  });
+
+
+  res.render("tables", {data:endstring});
+
+ });
+
+ route.get("/deletecomment", async (req, res) => {
+  await Contacts.remove({ _id: req.query.id }, function(err) {
+    if (!err) {
+            res.redirect('back')
+    }
+    else {
+          console.log(err)
+    }
+});
+
+ });
 
 
 module.exports = route;

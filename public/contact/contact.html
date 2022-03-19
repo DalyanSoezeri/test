@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact V12</title>
+	<title>Contact</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -24,21 +24,22 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	<nav>
+	<nav style="background: #333333;">
 		<input type="checkbox" id="check">
 		<label for="check" class="checkbtn">
-			<i class="fas fa-bars"></i>
-		</label>
+			 
+		 <img src="../Pictures/threestripes.png" style="margin-bottom:-8px;" alt="">
+	 </label>
 
-		<label class="logo">VOCA.</label>
-		<ul>
-			<li><a href="../index.html">Home</a></li>
-			<li><a class="active" href="#">Contact</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Login</a></li>
-		</ul>
+		 <label class="logo">VOCA.</label>
+		 <ul>
+			 <li><a  href="../index.html">Home</a></li>
+			 <li><a class="active" href="#">Contact</a></li>
+			 <li><a href="../Aboutus/about.html">About</a></li>
+			 <li><a href="../views/login.html">Login</a></li>
+		 </ul>
 
-	</nav>
+	 </nav>
 	<div class="bg-contact100" style="background-image: url('images/bg-01.jpg');">
 		<div class="container-contact100">
 			<div class="wrap-contact100">
@@ -46,7 +47,7 @@
 					<img src="images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="contact100-form validate-form">
+				<form class="contact100-form validate-form" enctype="multipart/form-data" action="/incomingcontact" method="post">
 					<span class="contact100-form-title">
 						Get in touch
 					</span>

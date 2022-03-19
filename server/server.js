@@ -3,6 +3,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
+const fussy = require('fuse.js');
 const connectDB=require('../public/DB')
 //Import classes
 const {LiveGames} = require('./utils/liveGames');
@@ -14,6 +15,7 @@ const axios = require('axios');
 const publicPath = path.join(__dirname, '../public');
 var app = express();
 var server = http.createServer(app);
+
 var io = socketIO(server);
 var games = new LiveGames();
 var players = new Players();
@@ -26,6 +28,7 @@ var mongoose = require('mongoose');
 var url = "mongodb+srv://Dalyan:Dalyan@cluster0.3r4k7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const session = require('express-session');
+
 
 app.use(session({
     secret:'secret-key',
@@ -116,9 +119,28 @@ app.get('/edithandout', function(req, res){
     res.render('edithandout')
 })
 
+app.get('/searchforvocas', function(req, res){
+    res.render('searchforvocas')
+})
+
+app.get('/adminlogin', function(req, res){
+    res.render('adminlogin')
+})
+
+app.get('/admindashboard', function(req, res){
+    res.render('admindashboard')
+})
+
+app.get('/tables', function(req, res){
+    res.render('tables')
+})
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+
+
 
 server.listen(3000, () => {
     console.log("Server started on port 3000");
@@ -130,7 +152,7 @@ io.on('connection', (socket) => {
     
     //When host connects for the first time
     socket.on('host-join', (data) =>{
-        
+        var play = 0;
         //Check to see if id passed in url corresponds to id of kahoot game in database
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
@@ -150,7 +172,7 @@ io.on('connection', (socket) => {
                     socket.join(game.pin);//The host is joining a room based on the pin
 
                     console.log('Game Created with pin:', game.pin); 
-
+                    play = result[0].played
                     //Sending game pin to host so they can display it for players to join
                     socket.emit('showGamePin', {
                         pin: game.pin
@@ -158,8 +180,16 @@ io.on('connection', (socket) => {
                 }else{
                     socket.emit('noGameFound');
                 }
+                
+                dbo.collection('kahootGames').updateOne(
+                    query,
+                    { $set: { played: play+1 }}
+                 
+                )
                 db.close();
             });
+
+           
         });
         
     });
@@ -585,16 +615,30 @@ io.on('connection', (socket) => {
         });
     });
 
-    socket.on('searchforDBvocas', function(data){
+    socket.on('searchforDBvocas', function(data, userid){
+        
+            
+        const options = {
+            keys: [
+            "name"
+            ]
+        };
+  
+
         MongoClient.connect(url, function(err, db){
             if (err) throw err;
             
             var dbo = db.db('kahootDB');
-            dbo.collection("kahootGames").find({name:data}).toArray(function(err, res) {
+            dbo.collection("kahootGames").find().toArray(function(err, res) {
+              
+                const fuse = new fussy(res, options);
+
+                const pattern = data
+        
+                res = fuse.search(pattern)
                 
-                res.forEach(element => {
-                   console.log(element.name) 
-                });
+                res = res.filter(elements => elements.item.userid===userid)
+
                 if (err) throw err;
                 socket.emit('gameNamesDataDBvocas', res);
                 db.close();
@@ -629,35 +673,6 @@ io.on('connection', (socket) => {
         });
     });
 
-    
-    
-    socket.on('newQuiz', function(data){
-        MongoClient.connect(url, function(err, db){
-            if (err) throw err;
-            var dbo = db.db('kahootDB');
-            dbo.collection('kahootGames').find({}).toArray(function(err, result){
-                if(err) throw err;
-                var num = Object.keys(result).length;
-                if(num == 0){
-                	data.id = 1
-                	num = 1
-                }else{
-                	data.id = result[num -1 ].id + 1;
-                }
-                var game = data;
-                dbo.collection("kahootGames").insertOne(game, function(err, res) {
-                    if (err) throw err;
-                    db.close();
-                });
-                db.close();
-                socket.emit('startGameFromCreator', num);
-            });
-            
-        });
-        
-        
-    });   
-    
     socket.on('updateexisingquiz', function(data){
         MongoClient.connect(url, async function(err, db){
             if (err) throw err;
